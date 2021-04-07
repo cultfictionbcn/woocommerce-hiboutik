@@ -7,7 +7,7 @@ $back_link = '';
 if (current_user_can('activate_plugins')) {
   $config = WCUtil::getHiboutikConfiguration();
   $hiboutik = WCUtil::apiConnect($config);
-  $stock_available = $hiboutik->get("/stock_available/warehouse_id/{$config['HIBOUTIK_STORE_ID']}");
+  $stock_available = $hiboutik->get('/stock_available/all_wh/');
   $alert = '';
   $updated_products = [];
   if ($hiboutik->request_ok) {
