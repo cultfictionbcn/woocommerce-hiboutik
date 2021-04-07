@@ -323,6 +323,11 @@ function fromWooCommerce($order_id)
       'comments'         => "order_id : $wc_order_id\nComments : $customer_note"
       ]);
 
+      //Close sale
+      $hibou_close_sale = $hiboutik->post('/sales/close/', [
+      'sale_id'         => $hibou_sale_id
+      ]);
+
       // Unique sale id
       $hibou_update_sale_ext_ref = $hiboutik->put("/sale/$hibou_sale_id", [
       'sale_id' => $hibou_sale_id,
