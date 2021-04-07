@@ -90,12 +90,10 @@ function fromHiboutik($query)
           $json_msg->alert('warning', "WooCommerce: Cannot find product in Hiboutik using id '{$item['product_id']}', size {$item['product_size']}. Skipping...");
           continue;
         }
-        foreach ($stocks_dispo as $stock) {
-          if ($stock['warehouse_id'] == $config['HIBOUTIK_STORE_ID']) {// found the store
-            $quantity = $stock['stock_available'];
-            break;
+        $quantity = 0;
+          foreach ($stocks_dispo as $stock) {
+              $quantity = $quantity + $stock['stock_available'];
           }
-        }
         $wc_prod_id = (int) wc_get_product_id_by_sku($item['product_barcode']);
         if ($wc_prod_id == 0) {
           WCUtil::writeLog("Warning: Cannot find product in WooCommerce using barcode '{$item['product_model']}', id {$item['product_id']}. Skipping...");
